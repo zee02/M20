@@ -20,8 +20,5 @@ namespace WebMVC.Models
         public HttpPostedFileBase imagem { get; set; }
     }
 
-    public enum Genero
-    {
-        Masculino, Feminino
-    }
+  
 }
