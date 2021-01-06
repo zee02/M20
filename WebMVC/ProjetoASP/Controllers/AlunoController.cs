@@ -80,7 +80,42 @@ namespace ProjetoASP.Controllers
                 }
             }
 
-            return RedirectToAction("CriaAluno");
+            return RedirectToAction("ListarAluno");
+        }
+
+        public ActionResult DetalheAluno(int id)
+        {
+            ConexaoDB Conn = new ConexaoDB("localhost", 3307, "root", "root", "formacao");
+            Aluno aluno = null;
+            using (MySqlConnection conexao = Conn.ObterConexao())
+            {
+                if (conexao != null)
+                    using (MySqlCommand cmd = new MySqlCommand("select * from alunos where idalunos=@idaluno", conexao))
+                    {
+                        cmd.Parameters.AddWithValue("@idaluno", id);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if(reader.Read())
+                            {
+
+                                aluno = new Aluno()
+                                {
+                                    Naluno = reader.GetInt32("idAlunos"),
+                                    PriNome = reader.GetString("nome"),
+                                    UltNome = reader.GetString("ultimo_nome"),
+                                    Morada = reader.GetString("morada"),
+                                    Genero = reader.GetString("genero") == "Masculino" ? Genero.Masculino : Genero.Feminino,
+                                    DataNasc = reader.GetDateTime("datanasc"),
+                                    AnoEscolaridade = reader.GetInt16("ano_escolaridade"),
+                                    ImgPath = reader.GetString("foto")
+                                };
+                                return View(aluno);
+                            }
+                        }
+                    }
+
+            }
+            return RedirectToAction("ListarAluno");
         }
     }
 }

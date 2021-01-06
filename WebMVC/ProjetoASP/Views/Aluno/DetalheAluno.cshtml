@@ -1,0 +1,74 @@
+﻿@model ProjetoASP.Models.Aluno
+
+@{
+    ViewBag.Title = "Detalhe do Aluno";
+}
+
+<h2>DetalheAluno</h2>
+
+<div>
+    <h4>Aluno</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Naluno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Naluno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriNome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriNome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UltNome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UltNome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Morada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Morada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataNasc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataNasc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnoEscolaridade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnoEscolaridade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImgPath)
+        </dt>
+
+        <dd>
+            <img class="img-thumbnaill img-rounded" src="@Url.Content("~" + Model.ImgPath)" width="400" height="400" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new {  id = Model.Naluno  }) |
+    @Html.ActionLink("Lista de Alunos", "ListarAluno")
+</p>
