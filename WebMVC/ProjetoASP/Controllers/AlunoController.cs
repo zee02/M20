@@ -83,7 +83,7 @@ namespace ProjetoASP.Controllers
             return RedirectToAction("ListarAluno");
         }
 
-        public ActionResult DetalheAluno(int id)
+        public ActionResult DetalheAluno(int? id)
         {
             ConexaoDB Conn = new ConexaoDB("localhost", 3307, "root", "root", "formacao");
             Aluno aluno = null;
