@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ProjetoASP.Models.Aluno>
+
+@{
+    ViewBag.Title = "Lista de Alunos";
+}
+
+<h2>ListarAluno</h2>
+
+<p>
+    @Html.ActionLink("Criar Aluno", "CriaAluno")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Naluno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PriNome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UltNome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Morada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataNasc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnoEscolaridade)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Naluno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PriNome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UltNome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Morada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataNasc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnoEscolaridade)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new {  id=item.Naluno  }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.Naluno  }) |
+            @Html.ActionLink("Eliminar", "Delete", new {  id=item.Naluno  })
+        </td>
+    </tr>
+}
+
+</table>

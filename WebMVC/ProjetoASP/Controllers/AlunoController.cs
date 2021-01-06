@@ -11,7 +11,36 @@ namespace ProjetoASP.Controllers
 {
     public class AlunoController : Controller
     {
-        // GET: Aluno
+        public ActionResult ListarAluno()
+        {
+            ConexaoDB Conn = new ConexaoDB("localhost", 3307, "root", "root", "formacao");
+            List<Aluno> lista = new List<Aluno>();
+            using (MySqlConnection conexao = Conn.ObterConexao())
+            {
+                if (conexao != null)
+                    using (MySqlCommand cmd = new MySqlCommand("select * from alunos", conexao))
+                    {
+                        using(MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while(reader.Read())
+                            {
+                                lista.Add(new Aluno()
+                                {
+                                    Naluno = reader.GetInt32("idAlunos"),
+                                    PriNome = reader.GetString("nome"),
+                                    UltNome = reader.GetString("ultimo_nome"),
+                                    Morada = reader.GetString("morada"),
+                                    Genero = reader.GetString("genero") == "Masculino" ? Genero.Masculino : Genero.Feminino,
+                                    DataNasc = reader.GetDateTime("datanasc"),
+                                    AnoEscolaridade = reader.GetInt16("ano_escolaridade"),
+                                });
+                            }
+                        }
+                    }
+               
+            }
+            return View(lista);
+        }
         public ActionResult CriaAluno()
         {
             return View();
