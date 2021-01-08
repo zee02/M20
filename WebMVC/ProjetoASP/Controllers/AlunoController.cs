@@ -13,6 +13,7 @@ namespace ProjetoASP.Controllers
     {
         public ActionResult ListarAluno()
         {
+            if (Session["Login"] == null) return RedirectToAction("Login", "Registo");
             ConexaoDB Conn = new ConexaoDB("localhost", 3307, "root", "root", "formacao");
             List<Aluno> lista = new List<Aluno>();
             using (MySqlConnection conexao = Conn.ObterConexao())
@@ -43,13 +44,15 @@ namespace ProjetoASP.Controllers
         }
         public ActionResult CriaAluno()
         {
+            if (Session["Login"] == null) return RedirectToAction("Login", "Registo");
             return View();
         }
 
         [HttpPost]
         public ActionResult CriaAluno(Aluno aluno)
         {
-            if(ModelState.IsValid)
+            if (Session["Login"] == null) return RedirectToAction("Login", "Registo");
+            if (ModelState.IsValid)
             {
                 string ImagemNome = Path.GetFileNameWithoutExtension(aluno.Imagem.FileName);
                 string ImagemExt = Path.GetExtension(aluno.Imagem.FileName);
@@ -85,6 +88,7 @@ namespace ProjetoASP.Controllers
 
         public ActionResult DetalheAluno(int? id)
         {
+            if (Session["Login"] == null) return RedirectToAction("Login", "Registo");
             ConexaoDB Conn = new ConexaoDB("localhost", 3307, "root", "root", "formacao");
             Aluno aluno = null;
             using (MySqlConnection conexao = Conn.ObterConexao())
@@ -121,7 +125,8 @@ namespace ProjetoASP.Controllers
         [HttpPost]
         public ActionResult EditaAluno(Aluno aluno)
         {
-            if(ModelState.IsValid)
+            if (Session["Login"] == null) return RedirectToAction("Login", "Registo");
+            if (ModelState.IsValid)
             {
                 bool img = false;
                 if(aluno.Imagem != null)
@@ -168,6 +173,7 @@ namespace ProjetoASP.Controllers
         }
         public ActionResult EditaAluno(int? id)
         {
+            if (Session["Login"] == null) return RedirectToAction("Login", "Registo");
             ConexaoDB Conn = new ConexaoDB("localhost", 3307, "root", "root", "formacao");
             Aluno aluno = null;
             using (MySqlConnection conexao = Conn.ObterConexao())
@@ -203,6 +209,7 @@ namespace ProjetoASP.Controllers
 
         public ActionResult EliminaAluno(int? id)
         {
+            if (Session["Login"] == null) return RedirectToAction("Login", "Registo");
             ConexaoDB Conn = new ConexaoDB("localhost", 3307, "root", "root", "formacao");
             Aluno aluno = null;
 
@@ -242,6 +249,7 @@ namespace ProjetoASP.Controllers
         [HttpPost, ActionName("EliminaAluno")]
         public ActionResult EliminaAlunoConfirmacao(int? id)
         {
+            if (Session["Login"] == null) return RedirectToAction("Login", "Registo");
             ConexaoDB conn = new ConexaoDB("localhost", 3307, "root", "root", "formacao");
 
             using (MySqlConnection conexao = conn.ObterConexao())
@@ -265,6 +273,5 @@ namespace ProjetoASP.Controllers
             return RedirectToAction("ListarAluno");
         }
 
-
-    }
+        }
 }

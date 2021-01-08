@@ -96,12 +96,14 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlunoController.cs" />
+    <Compile Include="Controllers\RegistoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Aluno.cs" />
     <Compile Include="Models\ConexaoDB.cs" />
     <Compile Include="Models\Genero.cs" />
+    <Compile Include="Models\Utilizador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +116,8 @@
     <Content Include="Views\Aluno\DetalheAluno.cshtml" />
     <Content Include="Views\Aluno\EditaAluno.cshtml" />
     <Content Include="Views\Aluno\EliminaAluno.cshtml" />
+    <Content Include="Views\Registo\Registo.cshtml" />
+    <Content Include="Views\Registo\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

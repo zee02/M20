@@ -19,10 +19,21 @@
                 </button>
                 @Html.ActionLink("Gestão de Alunos", "ListarAlunos", "Aluno", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
+            <ul class="nav navbar-nav pull-right">
+                @{
+                    if (Session["login"] == null)
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Registo", new { }, new { @class = "navbar-brand" })</li>
+                        <li>@Html.ActionLink("Registar", "Registo", "Registo", new { }, new { @class = "navbar-brand" })</li>
+                    }
+                    else
+                    {
+                      <li class="navbar-right"> @Html.ActionLink("Sair", "Logout", "Registo", new { }, new { @class = "navbar-brand" })</li>
+                      <li class="navbar-right navbar text">@Html.Label("Utilizador: ")@Session["email"]</li>
+                    }
+                }
+
+            </ul>
         </div>
     </div>
 
