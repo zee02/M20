@@ -201,5 +201,70 @@ namespace ProjetoASP.Controllers
             return RedirectToAction("ListarAluno");
         }
 
+        public ActionResult EliminaAluno(int? id)
+        {
+            ConexaoDB Conn = new ConexaoDB("localhost", 3307, "root", "root", "formacao");
+            Aluno aluno = null;
+
+            using (MySqlConnection conexao = Conn.ObterConexao())
+            {
+                if (conexao != null)
+                    using (MySqlCommand cmd = new MySqlCommand("select * from alunos where idalunos=@idaluno", conexao))
+                    {
+                        cmd.Parameters.AddWithValue("@idaluno", id);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+
+                                aluno = new Aluno()
+                                {
+                                    Naluno = reader.GetInt32("idalunos"),
+                                    PriNome = reader.GetString("nome"),
+                                    UltNome = reader.GetString("ultimo_nome"),
+                                    Morada = reader.GetString("morada"),
+                                    Genero = reader.GetString("genero") == "Masculino" ? Genero.Masculino : Genero.Feminino,
+                                    DataNasc = reader.GetDateTime("datanasc"),
+                                    AnoEscolaridade = reader.GetInt16("ano_escolaridade"),
+                                    ImgPath = reader.GetString("foto")
+                                };
+                                TempData["ImagemPath"] = aluno.ImgPath;
+                                return View(aluno);
+                           
+                            }
+                        }
+                    }
+
+            }
+            return RedirectToAction("ListarAluno");
+        }
+
+        [HttpPost, ActionName("EliminaAluno")]
+        public ActionResult EliminaAlunoConfirmacao(int? id)
+        {
+            ConexaoDB conn = new ConexaoDB("localhost", 3307, "root", "root", "formacao");
+
+            using (MySqlConnection conexao = conn.ObterConexao())
+            {
+                if(conexao != null)
+                {
+                    string stm = "delete from alunos where idalunos = @idAluno";
+
+                    using(MySqlCommand cmd = new MySqlCommand(stm,conexao))
+                    {
+                        cmd.Parameters.AddWithValue("@idAluno", id);
+                        int nRgistos = cmd.ExecuteNonQuery();
+
+                        if(nRgistos == 1)
+                        {
+                            new FileInfo(ControllerContext.HttpContext.Server.MapPath(TempData["ImagemPath"].ToString())).Delete();
+                        }
+                    }
+                }
+            }
+            return RedirectToAction("ListarAluno");
+        }
+
+
     }
 }

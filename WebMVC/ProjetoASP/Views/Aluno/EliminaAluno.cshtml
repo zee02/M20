@@ -1,11 +1,12 @@
 ﻿@model ProjetoASP.Models.Aluno
 
 @{
-    ViewBag.Title = "Detalhe do Aluno";
+    ViewBag.Title = "Eliminar Aluno";
 }
 
-<h2>DetalheAluno</h2>
+<h2>EliminaAluno</h2>
 
+<h3>Tem a certeza que pretende apagar</h3>
 <div>
     <h4>Aluno</h4>
     <hr />
@@ -42,7 +43,6 @@
             @Html.DisplayFor(model => model.Morada)
         </dd>
 
-
         <dt>
             @Html.DisplayNameFor(model => model.Genero)
         </dt>
@@ -72,12 +72,19 @@
         </dt>
 
         <dd>
-            <img class="img-thumbnaill img-rounded" src="@Url.Content("~" + Model.ImgPath)" width="400" height="400" />
+            <img class="img-thumbnaill img-rounded" src="@Url.Content("~" + Model.ImgPath)"
+                 width="400" height="400" />
+
         </dd>
 
     </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Eliminar Pessoa", "ListarAluno")
+        </div>
+    }
 </div>
-<p>
-    @Html.ActionLink("Editar", "EditaAluno", new {  id = Model.Naluno  }) |
-    @Html.ActionLink("Lista de Alunos", "ListarAluno")
-</p>

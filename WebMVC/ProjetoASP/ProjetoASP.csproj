@@ -113,6 +113,7 @@
     <Content Include="Views\Aluno\ListarAluno.cshtml" />
     <Content Include="Views\Aluno\DetalheAluno.cshtml" />
     <Content Include="Views\Aluno\EditaAluno.cshtml" />
+    <Content Include="Views\Aluno\EliminaAluno.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
