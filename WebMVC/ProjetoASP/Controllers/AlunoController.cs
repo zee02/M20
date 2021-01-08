@@ -69,7 +69,7 @@ namespace ProjetoASP.Controllers
                             cmd.Parameters.AddWithValue("@primeiroNome", aluno.PriNome);
                             cmd.Parameters.AddWithValue("@ultimoNome", aluno.UltNome);
                             cmd.Parameters.AddWithValue("@morada", aluno.Morada);
-                            cmd.Parameters.AddWithValue("@genero", aluno.Genero);
+                            cmd.Parameters.AddWithValue("@genero", aluno.Genero.ToString());
                             cmd.Parameters.AddWithValue("@dataNasc", aluno.DataNasc);
                             cmd.Parameters.AddWithValue("@ano", aluno.AnoEscolaridade);
                             cmd.Parameters.AddWithValue("@foto", aluno.ImgPath);
@@ -142,14 +142,14 @@ namespace ProjetoASP.Controllers
                     {
                         string strFoto = (img) ? ",foto=@foto" : "";
                         string stm = "update alunos set nome=@primeiroNome," + "ultimo_nome=@ultimoNome," + 
-                        "morada=@morada," + "genero=@genero," + "datanasc=@dataNasc," + "ano_escolaridade=@ano," + strFoto + " where idalunos=@idAluno";
+                        "morada=@morada," + "genero=@genero," + "datanasc=@dataNasc," + "ano_escolaridade=@ano" + strFoto + " where idalunos=@idAluno";
 
                         using (MySqlCommand cmd = new MySqlCommand(stm, conexao))
                         {
                             cmd.Parameters.AddWithValue("@primeiroNome", aluno.PriNome);
                             cmd.Parameters.AddWithValue("@ultimoNome", aluno.UltNome);
                             cmd.Parameters.AddWithValue("@morada", aluno.Morada);
-                            cmd.Parameters.AddWithValue("@genero", aluno.Genero);
+                            cmd.Parameters.AddWithValue("@genero", aluno.Genero.ToString());
                             cmd.Parameters.AddWithValue("@dataNasc", aluno.DataNasc);
                             cmd.Parameters.AddWithValue("@ano", aluno.AnoEscolaridade);
                             cmd.Parameters.AddWithValue("@idAluno", aluno.Naluno);
@@ -161,7 +161,7 @@ namespace ProjetoASP.Controllers
                                
                             
                         }   
-                }
+                    }
                 }
             }
             return RedirectToAction("ListarAluno");
